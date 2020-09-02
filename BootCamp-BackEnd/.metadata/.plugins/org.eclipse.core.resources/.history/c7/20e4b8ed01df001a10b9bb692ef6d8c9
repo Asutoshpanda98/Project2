@@ -1,0 +1,45 @@
+package com.cg.scheduledprogramservice.service;
+
+
+import java.util.List;
+import java.util.Optional;
+
+import com.cg.scheduledprogramservice.entity.ScheduleEntity;
+
+public interface ScheduleService {
+	
+	
+	/*
+	 * name - getAllSchedules()
+	 * description - It will show all the schedule present in the Schedule Repository
+	 */
+	public List<ScheduleEntity> getAllSchedules();
+	/*
+	 * name - getScheduleById()
+	 * description - It will show Schedule present in the database if id
+	 *                is a valid
+	 */
+	Optional<ScheduleEntity> getScheduleById(int id); 
+	/*
+	 * name - addSchedule()
+	 * description - It will show Schedule present in the database if id
+	 *                is a valid
+	 */
+	ScheduleEntity addSchedule(ScheduleEntity schedule);
+	/*
+	 * name -updateScheduleById()
+	 * description - It will show update the schedule present in the database if id
+	 *                is a valid
+	 */
+	void updateScheduleById(int id,ScheduleEntity schedule);
+	/*
+	 * name -deleteScheduleById()
+	 * description - It will delete  the schedule present in the database if id
+	 *                is a valid
+	 */
+
+	void deleteSchedulebyId(int id);
+	
+	
+
+}

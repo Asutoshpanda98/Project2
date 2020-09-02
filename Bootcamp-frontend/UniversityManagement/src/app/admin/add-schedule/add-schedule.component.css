@@ -1,0 +1,19 @@
+@import url(https://fonts.googleapis.com/css?family=Lobster);
+.w3-lobster {
+    font-family: cursive;
+    font-size: 40px;
+    padding-left:20px;
+    color:blue;
+    
+}
+section{
+    padding:75px;
+    padding-bottom: 100px;
+    padding-left:560px
+}
+.form-group
+{
+    color:purple;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size:20px;
+}

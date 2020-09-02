@@ -1,0 +1,5 @@
+package com.cg.scheduledprogramservice.repository;
+
+public class ScheduleRepositoryTest {
+
+}

@@ -1,0 +1,70 @@
+package com.cg.scheduledprogramservice.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cg.scheduledprogramservice.entity.ScheduleEntity;
+import com.cg.scheduledprogramservice.exception.BodyNotFoundException;
+import com.cg.scheduledprogramservice.exception.ResourceNotFoundException;
+import com.cg.scheduledprogramservice.service.ScheduleService;
+
+import io.swagger.annotations.ApiOperation;
+
+@RestController
+@RequestMapping("/schedule")
+@CrossOrigin(origins = "http://localhost:4200")
+public class ScheduleController {
+
+	@Autowired
+	private ScheduleService scheduleService;
+
+	@ApiOperation(value = "Get all the available Schedules", notes = "This api end pints is to view all the schedules", response = ScheduleEntity.class)
+	@GetMapping("/getallschedules")
+	public List<ScheduleEntity> getAllSchedules() {
+		return this.scheduleService.getAllSchedules();
+	}
+
+	@ApiOperation(value = "Get the  Schedules by the id given as parameter", notes = "This api end pints is to view a single schedule sorted by id", response = ScheduleEntity.class)
+	@GetMapping("/getschedulebyid/{id}")
+	public Optional<ScheduleEntity> getScheduleById(@PathVariable("id") int id) {
+
+		return this.scheduleService.getScheduleById(id);
+	}
+
+	@ApiOperation(value = "To add a new schedule to the schedule database", notes = "This api end pints should add a schedule in the schedule database "
+			+ "This api can only be accesed by the Admin of the "
+			+ "University Management System ", response = ScheduleEntity.class)
+	@PostMapping("/addschedule")
+	public void addSchedule(@RequestBody ScheduleEntity scheduleEntity)  {
+		
+		scheduleService.addSchedule(scheduleEntity);
+	}
+
+	@ApiOperation(value = "To update a  schedule in the schedule database", notes = "This api end pints should update  a existing schedule in the schedule database "
+			+ "This api can only be accesed by the Admin of the "
+			+ "University Management System ", response = ScheduleEntity.class)
+	@RequestMapping(method = RequestMethod.PUT, value = "/updateschedule/{id}")
+
+	public void updateScheduleById(@RequestBody ScheduleEntity scheduleEntity, @PathVariable("id") int id) {
+		scheduleService.updateScheduleById(id, scheduleEntity);
+	}
+
+	@ApiOperation(value = "To delete a  schedule from the schedule database", notes = "This api end pints should delete  a existing schedule in the schedule database "
+			+ "This api can only be accesed by the Admin of the "
+			+ "University Management System ", response = ScheduleEntity.class)
+	@RequestMapping(method = RequestMethod.DELETE, value = "/deleteschedule/{id}")
+	public void delteScheduleById(@PathVariable("id") int id) {
+		scheduleService.deleteSchedulebyId(id);
+	}
+
+}

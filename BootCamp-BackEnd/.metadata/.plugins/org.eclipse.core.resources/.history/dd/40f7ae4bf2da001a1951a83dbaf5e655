@@ -1,0 +1,154 @@
+package com.cg.scheduledprogramservice.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cg.scheduledprogramservice.entity.ScheduleEntity;
+import com.cg.scheduledprogramservice.exception.ResourceNotFound;
+import com.cg.scheduledprogramservice.service.ScheduleService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
+import io.swagger.annotations.ApiOperation;
+
+import java.util.Optional;
+
+import org.apache.http.HttpStatus;
+import org.apache.log4j.Logger;
+
+@RestController
+@RequestMapping("/schedule")
+@CrossOrigin(origins="http://localhost:4200")
+public class ScheduleController 
+{
+	private static final Logger logger = org.apache.log4j.Logger.getLogger(ScheduleController.class);
+	
+	
+	@Autowired
+	private ScheduleService scheduleService;
+	
+	
+	
+	@ApiOperation(value="Get all the available Schedules",
+			notes="This api end pints is to view all the schedules",
+			response=ScheduleEntity.class)
+	@GetMapping ("/getallschedules")
+	public  Iterable<ScheduleEntity> getAllSchedules() {
+		
+		return this.scheduleService.getAllSchedules();
+	}
+
+	
+
+	
+	
+	@ApiOperation(value="Get the  Schedules by the id given as parameter",
+			notes="This api end pints is to view a single schedule sorted by id",
+			response=ScheduleEntity.class)
+	@GetMapping("/getschedulebyid/{id}")
+//	@HystrixCommand(fallbackMethod = "ScheduleNotFoundByIdErrorHandler")
+	public Optional<ScheduleEntity> getScheduleById(@PathVariable("id") String id)
+	{
+		if(id==null) {
+			logger.error("Resource Not Found, Id not provided for /getschedulebyid");
+			throw new ResourceNotFound("No resource Found, please provide Id to see the schedule");
+		}
+		return this.scheduleService.getScheduleById(id);
+	}
+	
+	
+
+	
+	
+	
+	@ApiOperation(value="To add a new schedule to the schedule database",
+			notes="This api end pints should add a schedule in the schedule database "
+					+ "This api can only be accesed by the Admin of the "
+					+ "University Management System ",
+			response=ScheduleEntity.class)
+	@PostMapping("/addschedule")
+//	@HystrixCommand(fallbackMethod = "ScheduleAdditionErrorHandler")
+	public void addSchedule(@RequestBody ScheduleEntity scheduleEntity)
+	{
+		if(scheduleEntity==null || scheduleEntity.getId().trim().length() == 0 || scheduleEntity.getName().trim().length() == 0 ||
+				scheduleEntity.getCertificate().trim().length() == 0) { 
+			logger.error("Null request,schedule details not provided at /addschedule");
+			throw new ResourceNotFound("Null request, please provide schedule details to add it in database");
+		}
+		scheduleService.addSchedule(scheduleEntity);
+	}
+
+	
+	
+	
+	
+	@ApiOperation(value="To update a  schedule in the schedule database",
+			notes="This api end pints should update  a existing schedule in the schedule database "
+					+ "This api can only be accesed by the Admin of the "
+					+ "University Management System ",
+			response=ScheduleEntity.class)
+	@RequestMapping(method = RequestMethod.PUT,value="/updateschedule/{id}")
+//	@HystrixCommand(fallbackMethod = "ScheduleUpdateErrorHandler")
+	public void updateScheduleById(@RequestBody ScheduleEntity scheduleEntity,@PathVariable("id") String id)
+	{
+		if(id==null)
+		{
+			logger.error("Null request,schedule details not provided at /addschedule");
+			throw new ResourceNotFound("Null request, please provide schedule details to add it in database");
+		}
+	   scheduleService.updateScheduleById(id,scheduleEntity);	
+	}
+	
+	
+	
+	
+	@ApiOperation(value="To delete a  schedule from the schedule database",
+			notes="This api end pints should delete  a existing schedule in the schedule database "
+					+ "This api can only be accesed by the Admin of the "
+					+ "University Management System ",
+			response=ScheduleEntity.class)
+	@RequestMapping(method = RequestMethod.DELETE,value="/deleteschedule/{id}")
+//	@HystrixCommand(fallbackMethod = "ScheduleNotFoundByIdErrorHandler")
+	public void delteScheduleById(@PathVariable("id") String id)
+	{
+		if(id==null)
+		{
+			logger.error("Null request, order Id not provided for deletion");
+			throw new ResourceNotFound("Null request, please provide id to removethe scheduel");
+		}
+	   scheduleService.deleteSchedulebyId(id);	
+	}
+	
+	
+//	//add Schedule error handler
+//		public ResponseEntity<ScheduleEntity> ScheduleAdditionErrorHandler(ScheduleEntity scheduleEntity) {
+//			logger.info("cannot add - Schedule entered is invalid");
+//			return ResponseEntity.status(HttpStatus.SC_BAD_REQUEST).body(null);
+//		}
+//		
+//		//update Schedule error handler
+//		public ResponseEntity<ScheduleEntity> ScheduleUpdateErrorHandler(ScheduleEntity scheduleEntity) {
+//			logger.info("cannot update - Schedule entered is invalid : " + scheduleEntity.getId());
+//			return ResponseEntity.status(HttpStatus.SC_NOT_FOUND).body(null);
+//		}
+//	
+//	////not found Schedule error handler
+//	public ResponseEntity<ScheduleEntity> ScheduleNotFoundByIdErrorHandler(int id) {
+//		logger.info("Schedule with id not present in database : " + id);
+//		return ResponseEntity.status(HttpStatus.SC_NOT_FOUND).body(null);
+//	}
+//	
+
+	
+	  
+	
+	
+
+}

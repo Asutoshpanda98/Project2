@@ -1,0 +1,43 @@
+package com.cg.scheduledprogramservice.service;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.*;
+import static org.junit.matchers.JUnitMatchers.*;
+
+import java.time.LocalDate;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import com.cg.scheduledprogramservice.entity.ScheduleEntity;
+import com.cg.scheduledprogramservice.repository.ScheduleRepository;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class ScheduleServiceImplTest 
+{
+	@Autowired
+	private ScheduleService scheduleService;
+	
+    @MockBean
+	private ScheduleRepository scheduleRepository;
+
+    @Test
+    public void testAddSchedule()
+    {
+    	ScheduleEntity scheduleEntity =new ScheduleEntity();
+    	scheduleEntity.setId(1);
+		scheduleEntity.setName("Mechanical");
+		scheduleEntity.setLocation("Bhubhaneswar");
+		scheduleEntity.setStartDate(LocalDate.of(2022, 02, 21));
+		scheduleEntity.setCertificate("degree");
+		scheduleEntity.setEndDate( LocalDate.of(2024, 02, 21));
+		Mockito.when(scheduleRepository.save(scheduleEntity)).thenReturn(scheduleEntity);
+		assertThat(scheduleService.addSchedule(scheduleEntity)).isEqualTo(scheduleEntity);
+    }
+}

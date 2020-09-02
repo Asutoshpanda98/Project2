@@ -1,0 +1,40 @@
+
+<section class="details-card">
+
+  <div class="container table-responsive">
+      <hr>
+      <br>
+      <br>
+      <header class="container overflow-hidden">
+        <div class=" w3-lobster">
+            <span class="w3-large">Schedule Details</span>
+        </div>
+
+<hr/>
+<div class="text">
+<div *ngIf="scheduleentity">
+  <div>
+    <label><b>Schedule Id: </b></label> {{scheduleentity.id}}
+  </div>
+  <div>
+    <label><b>Schedule Name: </b></label> {{scheduleentity.name}}
+  </div>
+  <div>
+    <label><b>Location: </b></label> {{scheduleentity.location}}
+  </div>  
+  <div>
+    <label><b>Start Date:</b></label> {{scheduleentity.startDate}}
+  </div>  
+  <div>
+    <label><b>End Date :</b></label> {{scheduleentity.location}}
+  </div>  
+  <div>
+    <label><b>Certificate:</b></label> {{scheduleentity.certificate}}
+  </div>  
+</div>
+</div>
+<br>
+<br>
+<div class="sick">
+<button  class="btn btn-success" routerLink="/schedule">Back </button><br>
+</div>

@@ -1,0 +1,43 @@
+<section class="details-card">
+
+  <div class="container table-responsive">
+      <hr>
+      <br>
+      <br>
+      <header class="container overflow-hidden">
+        <div class=" w3-lobster">
+            <span class="w3-large">Schedule Details</span>
+        </div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Schedule ID</th>
+            <th>Schedule Name</th>
+            <th>Location</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Certificate</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let scheduleentity of scheduleEntities | async">
+            <td>{{scheduleentity.id}}</td>
+            <td>{{scheduleentity.name}}</td>
+            <td>{{scheduleentity.location}}</td>
+            <td>{{scheduleentity.startDate}}</td>
+            <td>{{scheduleentity.endDate}}</td>
+            <td>{{scheduleentity.certificate}}</td>
+            <td>
+              <button (click)="updateScheduleById(scheduleentity.id)" class="btn btn-primary">Update</button>&nbsp;</td>
+            <td> <button (click)="scheduleDetails(scheduleentity.id)" class="btn btn-info" >Details</button>&nbsp;</td>
+            <td><button (click)="deleteScheduleById(scheduleentity.id)" class="btn btn-danger">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button type="button" class="btn btn-success" (click)="goToAddProduct()">Add a new schedule</button>&nbsp;
+      <button type="button" class="btn btn-primary"  routerLink="/admin" >Back</button>
+    </div>
+

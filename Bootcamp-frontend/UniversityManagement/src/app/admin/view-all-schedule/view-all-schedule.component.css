@@ -1,0 +1,22 @@
+@import url(https://fonts.googleapis.com/css?family=Lobster);
+.w3-lobster {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 40px;
+    text-align: center;
+    color:olivedrab;
+}
+.we-medium{
+font-family: "Lobster", serif;
+font-size: 40px;
+}
+.text
+{
+    text-align: center;
+    font-size:30px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color:royalblue
+}
+.sick
+{
+    text-align: center;
+}

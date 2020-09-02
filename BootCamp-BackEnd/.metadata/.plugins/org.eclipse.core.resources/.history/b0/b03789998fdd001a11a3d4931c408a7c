@@ -1,0 +1,5 @@
+package com.cg.scheduledprogramservice.entity;
+
+public class Response {
+
+}

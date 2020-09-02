@@ -1,0 +1,113 @@
+<br><br><br><br>
+<section class="details-card">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-4">
+              <div class="card-content">
+                  <div class="card-img">
+                      <!-- <img src="https://placeimg.com/380/230/nature" alt=""> -->
+                      <img src="./assets/images/programs.jpg" alt="">
+                  </div>
+                  <div class="card-desc">
+                      <h3>Programs Section</h3>
+                      <p> This section provides basic functionality to Manage
+                          the programs which are offered by university.
+                      </p>
+                      <a routerLink="/manageProgramsOffered" class="btn-card">Manage</a>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="card-content">
+                  <div class="card-img">
+                      <img src="./assets/images/schedule.jpg" alt="">
+
+                  </div>
+                  <div class="card-desc">
+                      <h3>Schedule Section</h3>
+                      <p>This section offers facility to maintain and introduce
+                          the schedules of programs provided.
+                      </p>
+                      <a routerLink="/schedule" class="btn-card">Manage</a>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="card-content">
+                  <div class="card-img">
+                      <img src="./assets/images/report.jpg" alt="">
+
+                  </div>
+                  <div class="card-desc">
+                      <h3>Report Section</h3>
+                      <p>
+                          This section provides feature of generating various 
+                          reports and performing analytics over them.
+                      </p>
+                      <a routerLink="/generateReports" class="btn-card">Manage</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+<!-- <section class="details-card">
+
+  <div class="container table-responsive">
+      <hr>
+      <br>
+      <br>
+      <header class="container overflow-hidden">
+        <div class=" w3-lobster">
+            <span class="w3-large">All Available Schedule</span>
+        </div>
+
+
+
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2>Schedule List </h2>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Schedule ID</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Certificate</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let scheduleentity of scheduleEntities | async">
+            <td>{{scheduleentity.id}}</td>
+            <td>{{scheduleentity.name}}</td>
+            <td>{{scheduleentity.location}}</td>
+            <td>{{scheduleentity.startDate}}</td>
+            <td>{{scheduleentity.endDate}}</td>
+            <td>{{scheduleentity.certificate}}</td>
+            <td>
+              <button (click)="updateScheduleById(scheduleentity.id)" class="btn btn-primary">Update</button>&nbsp;</td>
+            <td> <button (click)="scheduleDetails(scheduleentity.id)" class="btn btn-info" >Details</button>&nbsp;</td>
+            <td><button (click)="deleteScheduleById(scheduleentity.id)" class="btn btn-danger">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button type="button" class="btn btn-success" (click)="goToAddProduct()">Add a new schedule</button>
+    </div>
+  </div>
+ -->
